@@ -5,6 +5,7 @@ package com.example.rickandmortytestapp.features.search.presentation.screen
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.expandVertically
@@ -233,6 +234,7 @@ private fun SearchScreen(
                     characters.loadState.append is LoadState.Loading ||
                     isRefreshing
                 ) {
+                    Log.d("CHECK LOAD STATE", characters.loadState.toString())
                     CircularProgressIndicator(
                         modifier = Modifier
                             .fillMaxWidth(0.3f)
@@ -418,6 +420,7 @@ fun TopAppBarForSearch(
                 label = {
                     Text("Character name")
                 },
+                singleLine = true,
             )
             IconButton(
                 onClick = {

@@ -1,5 +1,6 @@
 package com.example.rickandmortytestapp.features.search.data.remote.paging
 
+import android.net.Uri
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -50,8 +51,7 @@ class SearchRemoteMediator(
                 }
             }
 
-            val regex = Regex("""(\d+)$""")
-            val page = regex.find(loadKey ?: "1")?.groupValues?.get(1)?.toLongOrNull()
+            val page = getPageByUrl(loadKey)?.toLongOrNull()
 
             val response = filter?.let {
                 service.getFilteredCharacters(filterMap = filter, page = page ?: 1)
@@ -100,5 +100,10 @@ class SearchRemoteMediator(
             Log.e("REMOTE MEDIATOR ERROR", e.message.toString())
             MediatorResult.Error(e)
         }
+    }
+
+    private fun getPageByUrl(url: String?): String?{
+        val uri = Uri.parse(url)
+        return uri.getQueryParameter("page")
     }
 }
