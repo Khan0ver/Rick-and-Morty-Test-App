@@ -14,7 +14,7 @@ import com.example.rickandmortytestapp.features.search.data.room.dao.RemoteKeyDa
 import com.example.rickandmortytestapp.features.search.data.room.entity.CharacterEntity
 import com.example.rickandmortytestapp.features.search.data.room.entity.LocationShortInfoEntity
 import com.example.rickandmortytestapp.features.search.data.room.entity.RemoteKeyEntity
-import com.example.rickandmortytestapp.features.search.data.toRoomEntity
+import com.example.rickandmortytestapp.features.search.data.room.mapper.toRoomEntity
 
 @OptIn(ExperimentalPagingApi::class)
 class SearchRemoteMediator(
@@ -35,20 +35,17 @@ class SearchRemoteMediator(
         loadType: LoadType,
         state: PagingState<Int, CharacterEntity>
     ): MediatorResult {
-        Log.d("CHECK CHECK MEDIATOR",loadType.toString())
         return try {
             val loadKey = when (loadType) {
                 LoadType.REFRESH -> null
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
                     val remoteKey = remoteKeyDao.remoteKeyByQuery(query)
-                    Log.d("APPEND", "APPEND")
                     if (remoteKey?.nextKey == null) {
                         return MediatorResult.Success(
                             endOfPaginationReached = true
                         )
                     }
-                    Log.d("APPEND nextkey", remoteKey.nextKey)
                     remoteKey.nextKey
                 }
             }

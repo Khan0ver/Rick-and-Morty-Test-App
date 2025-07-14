@@ -5,7 +5,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.rickandmortytestapp.features.search.domain.model.Character
-import com.example.rickandmortytestapp.features.search.domain.repository.SearchRepository
+import com.example.rickandmortytestapp.features.search.domain.usecase.GetAllFilteredCharactersUseCase
+import com.example.rickandmortytestapp.features.search.domain.usecase.GetCharacterByIdUseCase
+import com.example.rickandmortytestapp.features.search.domain.usecase.TryUpdateCharacterInfoByIdUseCase
 import com.example.rickandmortytestapp.features.search.presentation.model.FilterInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val repository: SearchRepository
+    private val getAllFilteredCharactersUseCase: GetAllFilteredCharactersUseCase,
+    private val getCharacterByIdUseCase: GetCharacterByIdUseCase,
+    private val tryUpdateCharacterInfoByIdUseCase: TryUpdateCharacterInfoByIdUseCase,
 ) : ViewModel() {
     private var _filter = MutableStateFlow(FilterInfo())
     val filter: StateFlow<FilterInfo> = _filter
@@ -69,14 +73,14 @@ class SearchViewModel @Inject constructor(
         filterMap["type"] = _filter.value.type
         filterMap["gender"] = _filter.value.gender
         viewModelScope.launch {
-            characters = repository.getAllFilteredCharacters(filterMap).cachedIn(viewModelScope)
+            characters = getAllFilteredCharactersUseCase(filterMap).cachedIn(viewModelScope)
         }
     }
 
     fun getCharacterInfoById(id: Long) {
         viewModelScope.launch {
-            character = repository.getCharacterById(id)
-            repository.tryUpdateInfoAboutCharacter(id)
+            character = getCharacterByIdUseCase(id)
+            tryUpdateCharacterInfoByIdUseCase(id)
         }
     }
 }

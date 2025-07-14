@@ -12,7 +12,7 @@ import com.example.rickandmortytestapp.features.search.data.room.RickAndMortyApp
 import com.example.rickandmortytestapp.features.search.data.room.dao.CharacterDAO
 import com.example.rickandmortytestapp.features.search.data.room.dao.LocationShortInfoDAO
 import com.example.rickandmortytestapp.features.search.data.room.dao.RemoteKeyDao
-import com.example.rickandmortytestapp.features.search.data.toRoomEntity
+import com.example.rickandmortytestapp.features.search.data.room.mapper.toRoomEntity
 import com.example.rickandmortytestapp.features.search.domain.model.Character
 import com.example.rickandmortytestapp.features.search.domain.model.toDomain
 import com.example.rickandmortytestapp.features.search.domain.repository.SearchRepository
@@ -29,7 +29,6 @@ class SearchRepositoryImpl @Inject constructor(
     private val service: SearchCharacterService,
 ) : SearchRepository {
     override suspend fun getAllFilteredCharacters(filterMap: Map<String, String>): Flow<PagingData<Character>> {
-        Log.d("CHECK CHECK", filterMap.toString())
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -56,7 +55,6 @@ class SearchRepositoryImpl @Inject constructor(
             }
         ).flow.map { pagingData ->
             pagingData.map {
-                Log.d("DEBUG PAGING DATA", it.toString())
                 it.toDomain()
             }
         }

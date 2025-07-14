@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.rickandmortytestapp.features.search.data.room.entity.RemoteKeyEntity
 
-@Dao()
+@Dao
 interface RemoteKeyDao {
     @Insert(
         entity = RemoteKeyEntity::class,

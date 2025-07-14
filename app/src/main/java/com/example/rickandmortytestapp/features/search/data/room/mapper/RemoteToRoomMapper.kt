@@ -1,4 +1,4 @@
-package com.example.rickandmortytestapp.features.search.data
+package com.example.rickandmortytestapp.features.search.data.room.mapper
 
 import com.example.rickandmortytestapp.features.search.data.remote.dto.CharacterDTO
 import com.example.rickandmortytestapp.features.search.data.remote.dto.LocationShortInfoDTO

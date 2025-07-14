@@ -1,10 +1,7 @@
 package com.example.rickandmortytestapp.features.search.data.room.entity
 
 import androidx.room.Entity
-import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.rickandmortytestapp.features.search.data.room.converters.Converter
 
 @Entity(tableName = "characters")
 data class CharacterEntity (
