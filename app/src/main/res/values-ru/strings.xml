@@ -3,6 +3,13 @@
     <string name="app_name">RickAndMortyTestApp</string>
     <string name="search">Искать персонажа</string>
     <string name="name">Имя</string>
+    <string name="status">Стаус</string>
+    <string name="species">Вид</string>
+    <string name="type">Тип</string>
+    <string name="gender">Пол</string>
+    <string name="current_location">Сейчас в</string>
+    <string name="origin_location">Родом из</string>
+    <string name="created">Создан</string>
 
     <string name="no_internet">Нет интернета</string>
     <string name="no_founded_characters">Не найдены персонажи</string>

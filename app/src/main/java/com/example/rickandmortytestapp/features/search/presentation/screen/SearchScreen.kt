@@ -369,7 +369,11 @@ fun FilterDropDownMenu(
                 expanded = true
             },
         ) {
-            Text(if (string != "") string else listOfFilter[0].first)
+            var text = string
+            listOfFilter.forEach {
+                if (it.second == string) text = it.first
+            }
+            Text(text = text)
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = !expanded }

@@ -170,37 +170,37 @@ private fun DetailScreen(
                 )
 
                 RowWithInfo(
-                    fieldName = "Status:",
+                    fieldName = stringResource(R.string.status) + ":",
                     infoForField = character.value?.status ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Species: ",
+                    fieldName = stringResource(R.string.species) + ":",
                     infoForField = character.value?.species ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Type:",
+                    fieldName = stringResource(R.string.type) + ":",
                     infoForField = character.value?.type ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Gender: ",
+                    fieldName = stringResource(R.string.gender) + ":",
                     infoForField = character.value?.gender ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Current: ",
+                    fieldName = stringResource(R.string.current_location) + ":",
                     infoForField = character.value?.currentLocationName ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Origin: ",
+                    fieldName = stringResource(R.string.origin_location) + ":",
                     infoForField = character.value?.originLocationName ?: "unknown",
                 )
 
                 RowWithInfo(
-                    fieldName = "Created: ",
+                    fieldName = stringResource(R.string.created) + ":",
                     infoForField = character.value?.created ?: "unknown"
                 )
 
