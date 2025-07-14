@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RickAndMortyTestApp</string>
+    <string name="search">Искать персонажа</string>
+    <string name="name">Имя</string>
+
+    <string name="no_internet">Нет интернета</string>
+    <string name="no_founded_characters">Не найдены персонажи</string>
+    <string name="something_wrong">Что-то пошло не так, попробуйте позже</string>
+
+    <string name="character_species">Вид персонажа</string>
+    <string name="character_type">Тип персонажа</string>
+
+    <string name="status_choose">Выберите статус</string>
+    <string name="status_any">Любой</string>
+    <string name="status_alive">Жив</string>
+    <string name="status_dead">Мёртв</string>
+    <string name="status_unknown">Неизвестно</string>
+
+    <string name="gender_choose">Выберите пол</string>
+    <string name="gender_any">Любой</string>
+    <string name="gender_male">Муж</string>
+    <string name="gender_female">Жен</string>
+    <string name="gender_genderless">Без пола</string>
+    <string name="gender_unknown">Неизвестно</string>
+</resources>

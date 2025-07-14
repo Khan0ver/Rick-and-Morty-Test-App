@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">RickAndMortyTestApp</string>
+    <string name="search">Search character</string>
+    <string name="name">Name</string>
+
+    <string name="no_internet">No internet</string>
+    <string name="no_founded_characters">No founded Characters</string>
+    <string name="something_wrong">Something wrong, Try later</string>
+
+    <string name="character_species">Character Species</string>
+    <string name="character_type">Character Type</string>
+
+    <string name="status_choose">Choose status</string>
+    <string name="status_any">Any</string>
+    <string name="status_alive">Alive</string>
+    <string name="status_dead">Dead</string>
+    <string name="status_unknown">Unknown</string>
+
+    <string name="gender_choose">Choose gender</string>
+    <string name="gender_any">Any</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_genderless">Genderless</string>
+    <string name="gender_unknown">Unknown</string>
+</resources>
