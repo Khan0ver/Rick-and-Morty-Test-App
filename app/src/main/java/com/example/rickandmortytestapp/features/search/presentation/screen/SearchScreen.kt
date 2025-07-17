@@ -39,7 +39,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -115,7 +114,6 @@ private fun SearchScreen(
     val scope = rememberCoroutineScope()
 
     var isRefreshing by remember { mutableStateOf(false) }
-    val pullRefreshState = rememberPullToRefreshState()
     val context = LocalContext.current
     val showFilters = remember { mutableStateOf(false) }
 
@@ -162,41 +160,41 @@ private fun SearchScreen(
                 onChangeGender = { onGenderChanged(it) },
             )
 
-            PullToRefreshBox(
-                isRefreshing = isRefreshing,
-                onRefresh = {
-                    isRefreshing = true
-                    if (isInternetAvailable(context)) {
-                        characters.refresh()
-                    } else {
-                        scope.launch { snackbarHostState.showSnackbar(messageSnackbarNoInternet) }
-                    }
-                    isRefreshing = false
-                },
-                modifier = Modifier
-                    .fillMaxSize(),
-                state = pullRefreshState,
-            ) {
-
+            Box(Modifier.fillMaxSize()){
                 if (characters.itemCount != 0) {
 
-                    LazyVerticalGrid(
+                    PullToRefreshBox(
+                        isRefreshing = isRefreshing,
+                        onRefresh = {
+                            isRefreshing = true
+                            if (isInternetAvailable(context)) {
+                                characters.refresh()
+                            } else {
+                                scope.launch { snackbarHostState.showSnackbar(messageSnackbarNoInternet) }
+                            }
+                            isRefreshing = false
+                        },
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(20.dp),
-                        columns = GridCells.Fixed(2),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            .fillMaxSize(),
                     ) {
-                        items(
-                            count = characters.itemCount,
-                            key = characters.itemKey { it.id },
-                            contentType = characters.itemContentType { "MyPagingItems" },
-                        ) { index ->
-                            CharacterCard(
-                                character = characters[index],
-                                pressedOnTheCharacter
-                            )
+                        LazyVerticalGrid(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(20.dp),
+                            columns = GridCells.Fixed(2),
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            items(
+                                count = characters.itemCount,
+                                key = characters.itemKey { it.id },
+                                contentType = characters.itemContentType { "MyPagingItems" },
+                            ) { index ->
+                                CharacterCard(
+                                    character = characters[index],
+                                    pressedOnTheCharacter
+                                )
+                            }
                         }
                     }
 
@@ -241,16 +239,16 @@ private fun SearchScreen(
                             .align(Alignment.TopCenter)
                     )
                 }
+            }
 
-                LaunchedEffect(
-                    characters
+            LaunchedEffect(
+                characters
+            ) {
+                if (
+                    characters.loadState.refresh is LoadState.Error ||
+                    characters.loadState.append is LoadState.Error
                 ) {
-                    if (
-                        characters.loadState.refresh is LoadState.Error ||
-                        characters.loadState.append is LoadState.Error
-                    ) {
-                        scope.launch { snackbarHostState.showSnackbar(messageSnackbarError) }
-                    }
+                    scope.launch { snackbarHostState.showSnackbar(messageSnackbarError) }
                 }
             }
         }

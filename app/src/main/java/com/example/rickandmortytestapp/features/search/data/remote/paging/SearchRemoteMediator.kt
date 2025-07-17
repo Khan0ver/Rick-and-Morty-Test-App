@@ -51,7 +51,9 @@ class SearchRemoteMediator(
                 }
             }
 
-            val page = getPageByUrl(loadKey)?.toLongOrNull()
+            val page = getPageByUrl(loadKey ?: "")?.toLongOrNull()
+
+            Log.d("CHECK PAGING", page.toString())
 
             val response = filter?.let {
                 service.getFilteredCharacters(filterMap = filter, page = page ?: 1)
@@ -102,7 +104,7 @@ class SearchRemoteMediator(
         }
     }
 
-    private fun getPageByUrl(url: String?): String?{
+    private fun getPageByUrl(url: String): String? {
         val uri = Uri.parse(url)
         return uri.getQueryParameter("page")
     }
